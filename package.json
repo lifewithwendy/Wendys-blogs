@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "dotnet": "^1.1.4",
     "express": "^4.19.2",
+    "mongoose": "^8.3.1",
     "nodemon": "^3.1.0"
   }
 }
