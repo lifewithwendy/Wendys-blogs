@@ -38,7 +38,7 @@ export default function Header() {
         </Button>
 
         <Link to='/sign-in'>
-            <Button gradientDuoTone='purpleToBlue'>
+            <Button gradientDuoTone='purpleToBlue' outline>
                 Sign In
             </Button>
         </Link>
@@ -49,21 +49,23 @@ export default function Header() {
 
        <Navbar.Collapse>
              {/* as={'div'} eliminates double a tags coming from Link and Navbar.Link */}
-            <Navbar.Link active={path ==="/"} as={'div'}>
-                <Link to='/'>
-                    Home
-                </Link>
-            </Navbar.Link>
-            <Navbar.Link active={path ==="/about"} as={'div'}>
-                <Link to='/about'>
-                    About
-                </Link>
-            </Navbar.Link>
-            <Navbar.Link active={path ==="/project"} as={'div'}>
-                <Link to='/project'>
-                    Project
-                </Link>
-            </Navbar.Link>
+            <Link to='/'>
+              <Navbar.Link active={path ==="/"} as={'div'}>
+                Home
+              </Navbar.Link>
+            </Link>
+
+            <Link to='/about'>
+              <Navbar.Link active={path ==="/about"} as={'div'}>
+                      About
+              </Navbar.Link>
+            </Link>
+
+            <Link to='/project'>
+              <Navbar.Link active={path ==="/project"} as={'div'}>   
+                Project
+              </Navbar.Link>
+            </Link>
             
         </Navbar.Collapse>
     </Navbar>
