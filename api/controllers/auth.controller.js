@@ -10,7 +10,7 @@ export const signup = async (req, res, next) => {
         next(errorHandler(400, 'All fields are required'));
     }
 
-    const hashpassword = await bcryptjs.hash(password, 10);
+    const hashpassword = await bcryptjs.hash(password, 10);//hashpassword
 
     const newUser= new  User({ 
         username, 
@@ -43,6 +43,7 @@ export const signin = async (req, res, next) => {
         if (!validPassword) {
             return next(errorHandler(400, 'Invalid password'));
         }
+        //making cookie
         const token = jwt.sign({ email: validUser.email, id: validUser._id }, process.env.JWT_SECRET,);// { expiresIn: '1h' });
         const { password: pass, ...rest } = validUser._doc;
 
