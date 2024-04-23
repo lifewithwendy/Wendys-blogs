@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        default: "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png",
+        default: "https://th.bing.com/th/id/R.f038b95defb4b72e7c7f35c8764ff639?rik=LXDhoT%2fDCX4CWQ&pid=ImgRaw&r=0",
     },
 },
 {timestamps: true}//saving time of creation and update
