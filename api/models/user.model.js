@@ -15,7 +15,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-},{timestamps: true}//saving time of creation and update
+    profilePicture: {
+        type: String,
+        default: "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png",
+    },
+},
+{timestamps: true}//saving time of creation and update
 );
 
 const User = mongoose.model('User', userSchema);

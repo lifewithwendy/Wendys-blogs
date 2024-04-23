@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import {useDispatch, useSelector} from 'react-redux'
+import OAuth from '../components/OAuth';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -61,7 +62,7 @@ export default function SignIn() {
         {/* Right side */}
         <div className="flex-1">
           <div className="">
-            <form className='flex  flex-col  gap-2' onSubmit={handleSubmission}>
+            <form className='flex flex-col gap-2' onSubmit={handleSubmission}>
 
               <div className="">
               <Label className="text-sm">Your Email</Label>
@@ -97,12 +98,14 @@ export default function SignIn() {
                   'Sign In'
                 )}
               </Button>
+              
+              <OAuth className='' />
 
             </form>
             <div className="flex gap-2 text-sm mt-2">
               <span className="text-sm">Dont have a account?</span>
-              <Link to='/signup' className='text-blue-500'> 
-              Sign Up
+              <Link to='/sign-up' className='text-blue-500'> 
+                Sign Up
               </Link>
             </div>
             {
