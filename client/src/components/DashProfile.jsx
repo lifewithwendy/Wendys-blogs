@@ -175,14 +175,14 @@ export default function DashProfile() {
           <TextInput 
             type='text' 
             id='username' 
-            autoComplete={currentUser.username || 'off'}
+            autoComplete={currentUser.username ? 'on' : 'off'}
             placeholder={currentUser.username}
             onChange={ handleChange }
           />
           <TextInput 
             type='email' 
             id='email' 
-            autoComplete={currentUser.email || 'off'}
+            autoComplete={currentUser.email ? 'on' : 'off'}
             placeholder={currentUser.email}
             onChange={ handleChange }
           />
@@ -192,7 +192,7 @@ export default function DashProfile() {
             placeholder='***********'
             onChange={ handleChange }
           />
-          <Button type ='submit' gradientDuoTone='purpleToBlue'>
+          <Button type ='submit' gradientDuoTone='purpleToBlue' outline>
             Update
           </Button>
       </form> 

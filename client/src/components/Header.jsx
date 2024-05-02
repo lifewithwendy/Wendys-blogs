@@ -47,10 +47,13 @@ export default function Header() {
 
         {currentUser ? (
           <Dropdown
+          className=''
             arrowIcon={false}
             inline
             label = {
               <Avatar 
+                className='relative self-center cursor-pointer 
+                shadow-md overflow-hidden rounded-full'
                 alt='user'
                 img={currentUser.profilePicture}
                 rounded
@@ -94,8 +97,8 @@ export default function Header() {
               </Navbar.Link>
             </Link>
 
-            <Link to='/project'>
-              <Navbar.Link active={path ==="/project"} as={'div'}>   
+            <Link to='/projects'>
+              <Navbar.Link active={path ==="/projects"} as={'div'}>   
                 Project
               </Navbar.Link>
             </Link>
