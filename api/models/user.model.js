@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://th.bing.com/th/id/R.f038b95defb4b72e7c7f35c8764ff639?rik=LXDhoT%2fDCX4CWQ&pid=ImgRaw&r=0",
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    }
 },
 {timestamps: true}//saving time of creation and update
 );

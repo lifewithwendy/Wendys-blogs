@@ -219,21 +219,21 @@ export default function DashProfile() {
           <TextInput 
             type='text' 
             id='username' 
-            autoComplete={currentUser.username ? 'on' : 'off'}
+            autoComplete='new-username'
             placeholder={currentUser.username}
             onChange={ handleChange }
           />
           <TextInput 
             type='email' 
             id='email' 
-            autoComplete={currentUser.email ? 'on' : 'off'}
+            autoComplete='new-email'
             placeholder={currentUser.email}
             onChange={ handleChange }
           />
           <TextInput 
             type='password' 
             id='password' 
-            autoComplete={currentUser.password ? 'on' : 'off'}
+            autoComplete='new-password'
             placeholder='***********'
             onChange={ handleChange }
           />
