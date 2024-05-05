@@ -21,13 +21,15 @@ import {
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi' 
+import { Link } from 'react-router-dom';
 
 export default function DashProfile() {
-  const { currentUser, error } = useSelector(state => state.user);
+  const { currentUser, error, loading } = useSelector(state => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploading, setImageFileUploading] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError,setUpdateUserError] = useState(null);
@@ -57,6 +59,7 @@ export default function DashProfile() {
     //   }
     // }
     setImageFileUploadError(null);
+    setImageFileUploading(true);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
     const storageRef = ref(storage, fileName);
@@ -76,11 +79,13 @@ export default function DashProfile() {
         setImageFileUploadProgress(null);
         setImageFile(null);
         setImageFileUrl(null);
+        setImageFileUploading(false);
       }, 
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageFileUrl(downloadURL);
           setFormData({ ...formData,profilePicture: downloadURL})
+          setImageFileUploading(null);
         });
       }
     );
@@ -98,7 +103,7 @@ export default function DashProfile() {
       setUpdateUserSuccess(null)
       return;
     }
-    if(imageFileUploadProgress < 100){
+    if(imageFileUploading || imageFileUploadProgress< 100){
       setUpdateUserError('Image is uploading...');
       setUpdateUserSuccess(null)
     }
@@ -237,9 +242,24 @@ export default function DashProfile() {
             placeholder='***********'
             onChange={ handleChange }
           />
-          <Button type ='submit' gradientDuoTone='purpleToBlue' outline>
-            Update
+          <Button 
+            type ='submit' 
+            gradientDuoTone='purpleToBlue' 
+            outline 
+            disabled={loading || imageFileUploading}>
+            {imageFileUploading ? 'Loading...' : 'Update'}
           </Button>
+          {currentUser.isAdmin && (
+          <Link to='/create-post'>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a post
+            </Button>
+          // </Link>
+          )}
       </form> 
       <div className="text-red-500 flex justify-between">
           <span onClick={() => setShowModel(true) }className='cursor-pointer'>Delete Account</span>
