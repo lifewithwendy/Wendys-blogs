@@ -258,7 +258,7 @@ export default function DashProfile() {
             >
               Create a post
             </Button>
-          // </Link>
+            </Link>
           )}
       </form> 
       <div className="text-red-500 flex justify-between">

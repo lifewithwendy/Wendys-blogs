@@ -20,7 +20,7 @@ export default function SignUp() {
       setErrorMessage('Please fill in all fields');
       return;
     }
-    console.log(formData);
+    // console.log(formData);
 
     try {
       setloading(true);
@@ -38,7 +38,7 @@ export default function SignUp() {
       }
       setloading(false);
       if (res.ok) {
-        navigate('/home');
+        navigate('/sign-in');
       }
     } catch (error) {
       setErrorMessage(error.message);

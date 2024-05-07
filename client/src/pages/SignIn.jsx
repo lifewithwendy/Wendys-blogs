@@ -19,7 +19,7 @@ export default function SignIn() {
     if ( !formData.email || !formData.password) {
       return dispatch(signInFailure('Please fill all the fields'));
     }
-    console.log(formData);
+    // console.log(formData);
 
     try {
       dispatch(signInStart());
