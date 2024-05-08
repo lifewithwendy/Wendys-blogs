@@ -8,25 +8,52 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useState } from 'react';
+import { useEffect, useState, } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css'
-import { useNavigate } from  'react-router-dom'
+import { useNavigate, useParams } from  'react-router-dom'
+import { set } from 'mongoose';
+import { useSelector } from 'react-redux';
 
-export default function CreatePost() {
+export default function UpdatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setformData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const { postId } = useParams();	
   const navigate = useNavigate();
+  const { currentUser } = useSelector(state => state.user);
   
   console.log(formData);
+  useEffect(() => {
+    try {
+        const fetchPost = async () => {
+            const res = await fetch(`/api/post/getposts?postId=${postId}`);
+            const data = await res.json();
+            if(!res.ok) {
+                console.log(data.message);
+                setPublishError(data.message);
+                return;
+            } 
+            if(res.ok) {
+                setPublishError(null);
+                setformData(data.posts[0]);
+            }
+        }
+        fetchPost();
+
+
+    } catch (error) {
+        console.log(error);
+    }
+  }, [postId]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/post/create', {
-        method: 'POST',
+      const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -87,9 +114,10 @@ export default function CreatePost() {
       console.log(error); 
     }
   };
+
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold'>Create a Post</h1>
+      <h1 className='text-center text-3xl my-7 font-semibold'>Update Post</h1>
       <form className='flex flex-col gap-4' onSubmit={ handleSubmit }>
         <div className="flex flex-cols gap-4 sm:flex-row justify-between">
           <TextInput 
@@ -97,12 +125,14 @@ export default function CreatePost() {
             placeholder='Title'
             required id='title'
             className='flex-1' 
+            value={formData.title}
             onChange={(e) => setformData({ ...formData, title: e.target.value })}
             />
           <Select 
             onChange={(e) => 
               setformData({ ...formData, category: e.target.value }) 
             }
+            value={formData.category }
           >
             <option value='uncategorized'>Select an option</option>
             <option value='javascript'>Java Script</option>
@@ -149,9 +179,10 @@ export default function CreatePost() {
         )
         }
         <ReactQuill 
+          value={formData.content }
           theme="snow" 
           placeholder='Write Something....'
-          className='h-72 mb-12'
+          className='h-72 mb-12 '
           required
           onChange={(value) => setformData({ ...formData, content: value})}
           />
