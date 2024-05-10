@@ -9,7 +9,7 @@ export default function PostPage() {
     const [loading, setLoading] = useState(true);
     const [post, setPost] = useState({});
     const [error, setError] = useState(false);
-    console.log(post);
+    // console.log(post);
     useEffect(() => {
         const fetchPost = async () => {
             try {
@@ -19,7 +19,7 @@ export default function PostPage() {
                 if (!res.ok) {
                     setLoading(false);
                     setError(true);
-                    console.log(data.message);
+                    // console.log(data.message);
                     return;
                 } else {
                     setPost(data.posts[0]);
