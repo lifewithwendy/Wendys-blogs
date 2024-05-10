@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Comment from './Comment';
 import { useNavigate } from 'react-router-dom';
+import { set } from 'mongoose';
 
 
 export default function CommentSection({postId}) {
@@ -65,6 +66,14 @@ export default function CommentSection({postId}) {
             console.log(error.message);
         }
     }
+
+    const handleEdit = async (comment, editedContent) => {
+        setComments(
+            comments.map((c) => 
+                c._id === comment._id ? {...c, content: editedContent} : c 
+            )
+        );
+    };
 
     useEffect(() => {
         const getComments = async () => {
@@ -147,6 +156,7 @@ export default function CommentSection({postId}) {
                                 key={comment._id} 
                                 comment={comment} 
                                 onLike={ handleLike }
+                                onEdit={ handleEdit }
                             />
                         ))
                     }
