@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function PostCard({key ,post}) {
+export default function PostCard( {post} ) {
   return (
     <div className="group relative w-full border hover:border-2 border-teal-500 h-[400px] overflow-hidden
     rounded-lg sm:w-[430px]">
