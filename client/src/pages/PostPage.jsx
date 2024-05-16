@@ -52,7 +52,7 @@ export default function PostPage() {
         
       }
       fetchRecentPosts();
-      }  
+      } ,[] 
     )
 
 
@@ -69,7 +69,7 @@ export default function PostPage() {
       </h1>
       <Link to={`/search?category=${post && post.category}`}
       className='self-center mt-5'>
-        <Button color='gray' pill size='xs'>{post && post.category}</Button>
+        <Button color='gray' pill="true" size='xs'>{post && post.category}</Button>
       </Link>
       <div className="rounded-12px">
         

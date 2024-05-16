@@ -23,8 +23,8 @@ export default function Home() {
 )  
 return (
     <div>
-      <div className="felx flex-col gap-6 lp-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold lg:text-6xl">Wellcome to my blog</h1>
+      <div className="felx flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
+        <h1 className="text-3xl mb-4 font-bold lg:text-6xl">Wellcome to my blog</h1>
         <p className="text-gray-500 text-xs">Here you will find veriety of articles and tutorials on toppics
           such as web development, software engineering, and programming languages.
         </p>

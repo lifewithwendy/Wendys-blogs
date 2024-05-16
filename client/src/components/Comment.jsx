@@ -49,14 +49,14 @@ export default function Comment({comment, onLike, onEdit, onDelete}) {
             }
         }
         getUser();
-    }, [comment,comment.content])
+    }, [comment])
   return (
     <div className="flex p-4 border-b dark:border-gray-600 text-sm">
     <div className="flex shrink-0 mr-3">
         <img 
             src={user.profilePicture}  
             alt={user.username} 
-            className='h-10 w-10 rounded-full bg-gray-200'
+            className='h-10 w-10 rounded-full bg-gray-200 object-cover'
         />
     </div>
     <div className="flex-1">
@@ -105,6 +105,7 @@ export default function Comment({comment, onLike, onEdit, onDelete}) {
                         type='button' 
                         className={`text-gray-400 hover:text-blue-500 ${
                             currentUser &&
+                            comment.likes &&
                             comment.likes.includes(currentUser._id) &&
                             '!text-blue-500'
                         }`}
