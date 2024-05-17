@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Table, Modal, Button  } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { motion } from 'framer-motion'
 
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
@@ -75,7 +76,11 @@ export default function DashPosts() {
     scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       {
         currentUser.isAdmin && userPosts.length > 0 ? (
-          <>
+          <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          >
             <Table hoverable className='shadow-md '>
               <Table.Head>
                 <Table.HeadCell>Date updated</Table.HeadCell>
@@ -142,7 +147,7 @@ export default function DashPosts() {
                 </button>
               )
             }
-          </>
+          </motion.div>
         ) : (
           <p>You have no Posts yet!</p>
         )

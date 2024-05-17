@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css'
 import { useNavigate } from  'react-router-dom'
+import { motion } from 'framer-motion';
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
@@ -88,7 +89,12 @@ export default function CreatePost() {
     }
   };
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <motion.div 
+      className='p-3 max-w-3xl mx-auto min-h-screen'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <h1 className='text-center text-3xl my-7 font-semibold'>Create a Post</h1>
       <form className='flex flex-col gap-4' onSubmit={ handleSubmit }>
         <div className="flex flex-cols gap-4 sm:flex-row justify-between">
@@ -167,6 +173,6 @@ export default function CreatePost() {
             </Alert>
         }
       </form>
-    </div>
+    </motion.div>
   )
 }

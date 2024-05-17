@@ -6,6 +6,7 @@ import DashPosts from '../components/DashPosts';
 import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
 import DashboardComp from '../components/DashboardComp';
+import { motion } from 'framer-motion'
 
 
 export default function Dashboard() {
@@ -20,7 +21,12 @@ export default function Dashboard() {
 
   }, [location.search]);
   return (
-    <div className='min-h-screen flex flex-col md:flex-row'>
+    <motion.div 
+      className='min-h-screen flex flex-col md:flex-row'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <div className="">
         {/* sidebar */}
         <DashSidebar />
@@ -35,6 +41,6 @@ export default function Dashboard() {
       {/* dashboard componet */}
       {tab ==='dash' && <DashboardComp />}
 
-    </div>
+    </motion.div>
   )
 }

@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signoutSuccess } from '../redux/user/userSlice';
+import { motion } from 'framer-motion'
 
 
 export default function DashSidebar() {
@@ -36,7 +37,12 @@ export default function DashSidebar() {
       } 
     }, [location.search]);
   return (
-      <Sidebar className='w-full md:w-56'>
+      <Sidebar 
+        className='w-full md:w-56'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        >
         <Sidebar.Items>
             <Sidebar.ItemGroup className='flex flex-col gap-1'>
                 {

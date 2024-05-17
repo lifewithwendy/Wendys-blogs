@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import {useDispatch, useSelector} from 'react-redux'
 import OAuth from '../components/OAuth';
+import { motion } from 'framer-motion';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -43,7 +44,12 @@ export default function SignIn() {
   }
 
   return (
-    <div className='min-h-screen mt-20'>
+    <motion.div 
+      className='min-h-screen mt-20'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <div className="flex p-3 max-w-3xl mx-auto flex-col  md:flex-row  md:items-center gap-5">
         {/* Left side */}
         <div className="flex-1">
@@ -118,6 +124,6 @@ export default function SignIn() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

@@ -1,8 +1,14 @@
 import React from 'react'
+import {motion} from 'framer-motion'
 
 export default function About() {
   return (
-    <div className='min-h-screen flex item-center justify center'>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className='min-h-screen flex item-center justify center'  
+      >
       <div className="max-w-2xl mx-auto p-3 text-center">
         <div className="">
           <h1 className="text-3xl font-semibold text-center">About Wendy's Blog</h1>
@@ -19,6 +25,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import CallToAction from '../components/CallToAction';
 import { useEffect,useState } from 'react';
 import PostCard from '../components/PostCard';
+import { motion } from 'framer-motion'
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -22,7 +23,11 @@ export default function Home() {
   },[]
 )  
 return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className="felx flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-3xl mb-4 font-bold lg:text-6xl">Wellcome to my blog</h1>
         <p className="text-gray-500 text-xs">Here you will find veriety of articles and tutorials on toppics
@@ -47,13 +52,15 @@ return (
                 )
                 )}
               </div>
-            <Link to='/search' className="text-lg text-teal-500 hover:underline text-center">
-              <button color='gray' pill size='xs'>View all posts</button>
-            </Link> 
+            <div className="flex justify-center">
+              <Link to='/search' className="text-lg text-teal-500 hover:underline ">
+                <button color='gray' className='text-sm font-semibold' pill size='xs'>View all posts</button>
+              </Link> 
+            </div>
             </div>
         )
         }
       </div>
-    </div>
+    </motion.div>
   )
 }

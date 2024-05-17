@@ -22,6 +22,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi' 
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion' 
 
 export default function DashProfile() {
   const { currentUser, error, loading } = useSelector(state => state.user);
@@ -173,7 +174,12 @@ export default function DashProfile() {
   }, [imageFile]);
 
   return (
-    <div className='max-w-lg mx-auto p-3 w-full'>
+    <motion.div 
+      className='max-w-lg mx-auto p-3 w-full'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <h1 className='my-6 text-center font-semibold text-3xl'>Profile</h1>
       <form className='flex flex-col gap-4' onSubmit={ handleSubmit }>
         <input 
@@ -306,6 +312,6 @@ export default function DashProfile() {
             </div>
           </Modal.Body>
       </Modal>
-    </div>
+    </motion.div>
   );
 }

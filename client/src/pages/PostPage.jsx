@@ -4,6 +4,7 @@ import { Button, Spinner } from 'flowbite-react'
 import CallToAction from '../components/CallToAction';
 import CommentSection from '../components/CommentSection';
 import PostCard from '../components/PostCard';
+import { motion } from 'framer-motion'
 
 export default function PostPage() {
     const { postSlug } = useParams();
@@ -62,7 +63,12 @@ export default function PostPage() {
         </div>
     }
   return (
-    <main className='p-3 flex flex-col max-w-6xl sm:3xl mx-auto min-h-screen'>
+    <motion.main 
+      className='p-3 flex flex-col max-w-6xl sm:3xl mx-auto min-h-screen'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <h1 className='text-3xl mt-10 p-3 
       text-center font-serif max-w-2xl mx-auto lg:text-4xl'> 
         {post && post.title}
@@ -103,6 +109,6 @@ export default function PostPage() {
           }
         </div>
       </div>
-    </main>
+    </motion.main>
   )
 }

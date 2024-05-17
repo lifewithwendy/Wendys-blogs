@@ -2,6 +2,7 @@ import { Button, Select, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import PostCard from "../components/PostCard";
+import { motion } from 'framer-motion'
 
 export default function Search() {
     const [sidebarData, setSidebarData] = useState({
@@ -103,7 +104,12 @@ export default function Search() {
         fetchPosts();
     },[location.search])
   return (
-    <div className="flex flex-col md:flex-row">
+    <motion.div 
+        className="flex flex-col md:flex-row"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
       <div className="p-7 border-b md:border-r md:min-h-screen border-gray-500">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
             <div className="flex items-center gap-2">
@@ -167,6 +173,6 @@ export default function Search() {
         )}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

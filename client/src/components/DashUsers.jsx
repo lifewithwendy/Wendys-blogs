@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { set } from 'mongoose';
+import { motion } from 'framer-motion';
 
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
@@ -71,7 +72,11 @@ export default function DashUsers() {
     scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       {
         currentUser.isAdmin && users.length > 0 ? (
-          <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            >
             <Table hoverable className='shadow-md '>
               <Table.Head>
                 <Table.HeadCell>Date Created</Table.HeadCell>
@@ -127,7 +132,7 @@ export default function DashUsers() {
                 </button>
               )
             }
-          </>
+          </motion.div>
         ) : (
           <p>You have no users yet!</p>
         )

@@ -4,6 +4,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import OAuth from '../components/OAuth';
+import { motion } from 'framer-motion';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -47,7 +48,12 @@ export default function SignUp() {
   }
 
   return (
-    <div className='min-h-screen mt-20'>
+    <motion.div 
+      className='min-h-screen mt-20'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <div className="flex p-3 max-w-3xl mx-auto flex-col  md:flex-row  md:items-center gap-5">
         {/* Left side */}
         <div className="flex-1">
@@ -131,6 +137,6 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
