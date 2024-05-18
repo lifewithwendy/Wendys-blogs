@@ -88,7 +88,7 @@ export default function Header() {
 
         {currentUser ? (
           <Dropdown
-          className=''
+            className=''
             arrowIcon={false}
             inline
             label = {

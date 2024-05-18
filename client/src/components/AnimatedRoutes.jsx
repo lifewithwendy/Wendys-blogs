@@ -11,6 +11,7 @@ import OnlyAdminPrivateRoute from "../components/OnlyAdminPrivateRoute";
 import UpdatePost from '../pages/UpdatePost';
 import PostPage from "../pages/PostPage";
 import Search from "../pages/Search";
+import CreateAd from "../pages/CreateAd";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {AnimatePresence} from 'framer-motion'
@@ -27,6 +28,8 @@ function AnimatedRoutes() {
         <Route element={<OnlyAdminPrivateRoute /> } >
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/update-post/:postId" element={<UpdatePost />} />
+        <Route path="/create-ad" element={<CreateAd />} />
+
         </Route>
         <Route path="/projects" element={<Projects />} />
         <Route path="/sign-up" element={<SignUp />} />

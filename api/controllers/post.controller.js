@@ -6,7 +6,7 @@ export const create = async (req, res, next) => {
     if (!req.user.isAdmin) {
         return next(errorHandler(403, 'You are not allowed to create a post'));
     }
-    if (!req.body.title || !req.body.content) {
+    if (!req.body.title || !req.body.image) {
         return next(errorHandler(400, 'Title and content are required'));
     }
     const slug = req.body.title
@@ -33,7 +33,7 @@ export const getposts = async (req, res, next) => {
     try {
         const startIndex = parseInt(req.query.startIndex) || 0;
         const limit = parseInt(req.query.limit) || 9;
-        const sortDirrection = req.query.sortDirrection === 'asc' ? 1 : -1;
+        const sortDirrection = req.query.sort === 'asc' ? 1 : -1;
         const posts = await Post.find({
             ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.slug && { slug: req.query.slug }),
