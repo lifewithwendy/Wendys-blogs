@@ -57,6 +57,20 @@ export const editAdvertisement = async (req, res, next) => {
 }
 
 export const deleteAdvertisement = async (req, res, next) => {
-
+    try {
+        const ad = await Advertisement.findById(req.params.id);
+        if (!ad) {
+          return next(errorHandler(404, 'Advertisement not found'));
+        }
+        if (!req.user.isAdmin) {
+          return next(errorHandler(403, 'You are not allowed to delete this Advertisement'));
+        }
+        await Advertisement.findByIdAndDelete(req.params.Id);
+        res
+            .status(200)
+            .json('Advertisement has been deleted');
+      } catch (error) {
+        next(error);
+      }
 }
 

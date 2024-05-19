@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux'
 import { Table, Modal, Button  } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa';
-import { set } from 'mongoose';
 import { motion } from 'framer-motion';
 
 export default function DashAds() {
@@ -32,7 +30,7 @@ export default function DashAds() {
   const handleDeleteAd= async () => {
     setShowModel(false);
     try {
-      const res = await fetch(`/api/ad/delete/${adIdToDelete}`, {
+      const res = await fetch(`/api/ad/deleteAd/${adIdToDelete}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -85,6 +83,7 @@ export default function DashAds() {
                 <Table.HeadCell>title</Table.HeadCell>
                 <Table.HeadCell>view count</Table.HeadCell>
                 <Table.HeadCell>Delete</Table.HeadCell>
+                <Table.HeadCell>Delete</Table.HeadCell>
               </Table.Head>
               {
                 ads.map((ad) => (
@@ -115,6 +114,13 @@ export default function DashAds() {
                         >
                           Delete
                         </span>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Link to={`/update-ad/${ad._id}`}
+                          className='text-teal-400 hover:underline '
+                        >
+                          <span>Edit</span>
+                        </Link>
                       </Table.Cell>
                     </Table.Row>
                   </Table.Body>
