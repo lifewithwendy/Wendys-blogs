@@ -34,7 +34,7 @@ export const getAdvertisements = async (req, res, next) => {
         const startIndex = parseInt(req.query.startIndex) || 0;
         const limit = parseInt(req.query.limit) || 9;
         const sortDirection = req.query.sort === 'desc' ? -1 : 1;
-        const Ads = await Advertisement.find()
+        const ads = await Advertisement.find()
             .sort({ createdAt: sortDirection })
             .skip(startIndex)
             .limit(limit);
@@ -46,7 +46,7 @@ export const getAdvertisements = async (req, res, next) => {
 
         res
             .status(200)
-            .json({ Ads, totalAds, lastMonthAds });
+            .json({ ads, totalAds, lastMonthAds });
     } catch (error) {
         next(error);
     }
