@@ -12,6 +12,7 @@ import UpdatePost from '../pages/UpdatePost';
 import PostPage from "../pages/PostPage";
 import Search from "../pages/Search";
 import CreateAd from "../pages/CreateAd";
+import UpdateAd from "../pages/UpdateAd"
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {AnimatePresence} from 'framer-motion'
@@ -29,6 +30,7 @@ function AnimatedRoutes() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/update-post/:postId" element={<UpdatePost />} />
         <Route path="/create-ad" element={<CreateAd />} />
+        <Route path="/update-ad/:adId" element={<UpdateAd />} />
 
         </Route>
         <Route path="/projects" element={<Projects />} />

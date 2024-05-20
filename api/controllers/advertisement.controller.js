@@ -52,8 +52,41 @@ export const getAdvertisements = async (req, res, next) => {
     }
 }
 
-export const editAdvertisement = async (req, res, next) => {
+export const getAdToUpdate = async (req, res, next) => {
+    try {
+        const ad = await Advertisement.findById(req.params.id);
+        if (!ad) {
+            return next(errorHandler(404, 'Advertisement not found'));
+        }
+        res
+            .status(200)
+            .json(ad);
+    } catch (error) {
+        next(error.message);
+    }
 
+}
+
+export const editAdvertisement = async (req, res, next) => {
+    if(!req.user.isAdmin){
+        return next(errorHandler(403, 'You are not allowed to update this post'));
+    }
+    try {
+        const updatedAdvertisement = await Advertisement.findByIdAndUpdate(
+            req.params.id,
+            { $set: {
+                title: req.body.title,
+                image: req.body.image,
+                }
+             },
+            { new: true }
+        );
+        res
+            .status(200)
+            .json(updatedAdvertisement);
+    } catch (error) {
+        next(error)
+    }
 }
 
 export const deleteAdvertisement = async (req, res, next) => {
