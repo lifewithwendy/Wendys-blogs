@@ -79,11 +79,14 @@ export default function DashAds() {
             <Table hoverable className='shadow-md '>
               <Table.Head>
                 <Table.HeadCell>Date Created</Table.HeadCell>
-                <Table.HeadCell>image</Table.HeadCell>
-                <Table.HeadCell>title</Table.HeadCell>
-                <Table.HeadCell>view count</Table.HeadCell>
+                <Table.HeadCell>Image</Table.HeadCell>
+                <Table.HeadCell>Title</Table.HeadCell>
+                <Table.HeadCell>Url</Table.HeadCell>
+                <Table.HeadCell>Priority</Table.HeadCell>
+                <Table.HeadCell>Type</Table.HeadCell>
+                <Table.HeadCell>View count</Table.HeadCell>
                 <Table.HeadCell>Delete</Table.HeadCell>
-                <Table.HeadCell>Delete</Table.HeadCell>
+                <Table.HeadCell>Update</Table.HeadCell>
               </Table.Head>
               {
                 ads.map((ad) => (
@@ -101,6 +104,15 @@ export default function DashAds() {
                       </Table.Cell>
                       <Table.Cell>
                           {ad.title}                        
+                      </Table.Cell>
+                      <Table.Cell>
+                          {ad.link}                        
+                      </Table.Cell>
+                      <Table.Cell>
+                          {ad.priority}                        
+                      </Table.Cell>
+                      <Table.Cell>
+                          {ad.type}                        
                       </Table.Cell>
                       <Table.Cell>
                         {ad.views.length}

@@ -2,7 +2,8 @@ import {
   Alert, 
   Button, 
   FileInput, 
-  TextInput 
+  TextInput,
+  Select 
 } from 'flowbite-react';
 import {
   getDownloadURL,
@@ -28,7 +29,7 @@ export default function UpdateAd() {
   const [publishError, setPublishError] = useState(null);
   const { adId } = useParams();
   const navigate = useNavigate();
-  
+  console.log(formData)
  
   useEffect(() => {
     try {
@@ -138,6 +139,38 @@ export default function UpdateAd() {
             className='flex-1' 
             onChange={(e) => setformData({ ...formData, title: e.target.value })}
             />
+          <Select
+            value={formData.priority} 
+            onChange={(e) => 
+              setformData({ ...formData, priority: e.target.value }) 
+            }
+          >
+            <option value=''>Select Priority</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+          </Select>
+        </div>
+        <div className="flex flex-cols gap-4 sm:flex-row justify-between">
+          <TextInput 
+            type='link' 
+            placeholder='Redirect Link'
+            id='link'
+            value={formData.link}
+            className='flex-1' 
+            onChange={(e) => setformData({ ...formData, link: e.target.value })}
+            />
+          <Select 
+          value={formData.type}
+            onChange={(e) => 
+              setformData({ ...formData, type: e.target.value }) 
+            }
+          >
+            <option value='portrait'>Select Image Type</option>
+            <option value='lanscape'>lanscape</option>
+            <option value='portrait'>portrait</option>
+            <option value='square'>square</option>
+          </Select>
         </div>
         <div className="flex gap-4 item-center justify-between 
         border-4 border-teal-500 border-dotted p-3">

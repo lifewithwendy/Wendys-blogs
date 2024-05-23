@@ -13,7 +13,19 @@ const advertisementSchema = new mongoose.Schema({
     views: {
         type: Array,
         default: []
-    }  
+    },
+    link: {
+        type: String,
+        required: true,
+    },  
+    type: {
+        type: String,
+        default: "portrait", // lanscape, portrait, square
+    },
+    priority: {
+        type: Number,
+        default: 1, // 1,2,3
+    },
 }, { timestamps: true }); 
 
 const Advertisement = mongoose.model('Advertisement', advertisementSchema);

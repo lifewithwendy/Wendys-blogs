@@ -5,15 +5,18 @@ export const createAdvertisement = async (req, res, next) => {
     if (!req.user.isAdmin) {
         return next(errorHandler(403, 'You are not allowed to create a Advertisement'));
     }
-    if (!req.body.image) {
-        return next(errorHandler(400, 'ID and iMAGE are required'));
+    if (!req.body.image || !req.body.title || !req.body.link) {
+        return next(errorHandler(400, 'title, image and link, are required'));
     }
     try {
-        const { title, image } = req.body;     
+        const { title, image, link, type, priority } = req.body;     
         const newAdvertisement = new Advertisement({
             ...req.body,
             title,
-            image
+            image,
+            link,
+            type,
+            priority,
         });
         await newAdvertisement.save();
         res
@@ -77,6 +80,9 @@ export const editAdvertisement = async (req, res, next) => {
             { $set: {
                 title: req.body.title,
                 image: req.body.image,
+                link: req.body.link,
+                type: req.body.type,
+                priority: req.body.priority,
                 }
              },
             { new: true }
