@@ -14,6 +14,10 @@ const advertisementSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    viewsCount: {
+        type: Number,
+        default: 0
+    },
     link: {
         type: String,
         required: true,

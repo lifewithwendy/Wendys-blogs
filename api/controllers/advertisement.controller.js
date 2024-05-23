@@ -1,6 +1,7 @@
 import Advertisement from "../models/advertisement.model.js";
 import { errorHandler } from "../utils/error.js";
 
+
 export const createAdvertisement = async (req, res, next) => {
     if (!req.user.isAdmin) {
         return next(errorHandler(403, 'You are not allowed to create a Advertisement'));
@@ -50,6 +51,7 @@ export const getAdvertisements = async (req, res, next) => {
         res
             .status(200)
             .json({ ads, totalAds, lastMonthAds });
+        
     } catch (error) {
         next(error);
     }
@@ -111,5 +113,35 @@ export const deleteAdvertisement = async (req, res, next) => {
       } catch (error) {
         next(error);
       }
+}
+
+export const getAdToShow = async (req, res, next) => {
+    try {
+        const priority = parseInt(req.query.priority) || 3;
+        const limit = parseInt(req.query.limit) || 1;
+        const userId = req.query.user || 'anonymous';
+        const view = {
+            user: userId,
+            date: new Date().toISOString()
+        };
+        console.log(priority, limit, userId);
+
+        const ads = await Advertisement.find({ priority })
+            .sort({ viewsCount: 1 })
+            .limit(limit);
+
+        // Use for...of to handle asynchronous updates
+        for (const ad of ads) {
+            await Advertisement.findByIdAndUpdate(ad._id, {
+                $push: { views: view },
+                $inc: { viewsCount: 1 }
+            });
+        }
+
+        res.status(200).json({ ads });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ error: error.message });
+    }
 }
 
