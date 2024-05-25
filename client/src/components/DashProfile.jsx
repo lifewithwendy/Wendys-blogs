@@ -229,7 +229,8 @@ export default function DashProfile() {
         }
           <TextInput 
             type='text' 
-            id='username' 
+            id='username'
+            value={formData.username || currentUser.username} 
             autoComplete='new-username'
             placeholder={currentUser.username}
             onChange={ handleChange }
@@ -237,6 +238,7 @@ export default function DashProfile() {
           <TextInput 
             type='email' 
             id='email' 
+            value={formData.email || currentUser.email}
             autoComplete='new-email'
             placeholder={currentUser.email}
             onChange={ handleChange }
@@ -244,6 +246,7 @@ export default function DashProfile() {
           <TextInput 
             type='password' 
             id='password' 
+            value={formData.password || ''}
             autoComplete='new-password'
             placeholder='***********'
             onChange={ handleChange }
@@ -296,7 +299,7 @@ export default function DashProfile() {
             gradientDuoTone='purpleToPink'
             className='w-full'
           >
-            Create a Advertisment
+            Create an Advertisment
           </Button>
           </Link>
         </>

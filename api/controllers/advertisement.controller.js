@@ -138,10 +138,14 @@ export const getAdToShow = async (req, res, next) => {
             });
         }
 
-        res.status(200).json({ ads });
+        res
+            .status(200)
+            .json({ ads });
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ error: error.message });
+        res
+            .status(500)
+            .json({ error: error.message });
     }
 }
 
