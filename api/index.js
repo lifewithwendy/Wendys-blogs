@@ -7,6 +7,8 @@ import postRoutes from './routes/post.route.js';
 import CommentRoutes from './routes/comment.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import AdvertisementRoutes from './routes/advertisement.route.js';
+
 
 dotenv.config();//importing critical things which are stored in remote files for security
 
@@ -31,6 +33,7 @@ app.use('/api/user', userRoutes);//imports useroutes(the user) route file
 app.use('/api/auth', authRoutes);//imports authroutes(the user) route file
 app.use('/api/post', postRoutes);//imports postroutes(the user) route file
 app.use('/api/comment', CommentRoutes);//imports commentroutes(the user) route file
+app.use('/api/ad', AdvertisementRoutes);//imports advertisement(the user) route file
 //When an error is passed to next(), Express.js will skip all remaining non-error handling 
 //routing and middleware functions and invoke this error-handling middleware
 app.use(express.static(path.join(__dirname, '/client/dist')));

@@ -180,7 +180,7 @@ export default function DashProfile() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       >
-      <h1 className='my-6 text-center font-semibold text-3xl'>Profile</h1>
+      <h1 className='my-4 text-center font-semibold text-3xl'>Profile</h1>
       <form className='flex flex-col gap-4' onSubmit={ handleSubmit }>
         <input 
           type="file" 
@@ -229,7 +229,8 @@ export default function DashProfile() {
         }
           <TextInput 
             type='text' 
-            id='username' 
+            id='username'
+            value={formData.username || currentUser.username} 
             autoComplete='new-username'
             placeholder={currentUser.username}
             onChange={ handleChange }
@@ -237,6 +238,7 @@ export default function DashProfile() {
           <TextInput 
             type='email' 
             id='email' 
+            value={formData.email || currentUser.email}
             autoComplete='new-email'
             placeholder={currentUser.email}
             onChange={ handleChange }
@@ -244,6 +246,7 @@ export default function DashProfile() {
           <TextInput 
             type='password' 
             id='password' 
+            value={formData.password || ''}
             autoComplete='new-password'
             placeholder='***********'
             onChange={ handleChange }
@@ -255,17 +258,6 @@ export default function DashProfile() {
             disabled={loading || imageFileUploading}>
             {imageFileUploading ? 'Loading...' : 'Update'}
           </Button>
-          {currentUser.isAdmin && (
-          <Link to='/create-post'>
-            <Button
-              type='button'
-              gradientDuoTone='purpleToPink'
-              className='w-full'
-            >
-              Create a post
-            </Button>
-            </Link>
-          )}
       </form> 
       <div className="text-red-500 flex justify-between">
           <span onClick={() => setShowModel(true) }className='cursor-pointer'>Delete Account</span>
@@ -287,6 +279,31 @@ export default function DashProfile() {
           {error}
         </Alert>
       }
+      {currentUser.isAdmin && (
+        <>
+        <h1 className='my-6 text-center font-semibold text-3xl'>Other options</h1>
+        <Link to='/create-post'>
+          <Button
+            outline
+            type='button'
+            gradientDuoTone='purpleToPink'
+            className='w-full mb-3'
+            >
+            Create a post
+          </Button>
+          </Link>
+          <Link to='/create-ad'>
+          <Button
+            outline
+            type='button'
+            gradientDuoTone='purpleToPink'
+            className='w-full'
+          >
+            Create an Advertisment
+          </Button>
+          </Link>
+        </>
+      )}
       <Modal 
         show={showModel} 
         onClose={() => setShowModel(false)}

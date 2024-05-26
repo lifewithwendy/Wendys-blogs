@@ -1,4 +1,12 @@
-import { HiUser,HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie } from 'react-icons/hi';
+import { 
+  HiUser,
+  HiArrowSmRight, 
+  HiDocumentText, 
+  HiOutlineUserGroup, 
+  HiAnnotation, 
+  HiChartPie,
+  HiSpeakerphone
+ } from 'react-icons/hi';
 import { Sidebar } from 'flowbite-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useState,useEffect } from 'react';
@@ -108,6 +116,20 @@ export default function DashSidebar() {
                             as ='div'
                         >
                             comments
+                        </Sidebar.Item>
+                    </Link>
+                  )
+                }
+                {
+                  currentUser.isAdmin && (
+                    <Link to='/dashboard?tab=ads'>
+                        <Sidebar.Item 
+                            active={tab === 'ads'}
+                            icon={ HiSpeakerphone } 
+                            labelColor='dark' 
+                            as ='div'
+                        >
+                            Advertisements
                         </Sidebar.Item>
                     </Link>
                   )

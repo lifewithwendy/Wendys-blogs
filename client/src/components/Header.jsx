@@ -88,7 +88,7 @@ export default function Header() {
 
         {currentUser ? (
           <Dropdown
-          className=''
+            className=''
             arrowIcon={false}
             inline
             label = {
@@ -112,11 +112,13 @@ export default function Header() {
             <Dropdown.Item onClick={ handleSignout }>Sign Out</Dropdown.Item>
           </Dropdown>
         ) : (
+          !(location.pathname === '/sign-in' || location.pathname === '/sign-up') && (
           <Link to='/sign-in'>
             <Button gradientDuoTone='purpleToBlue' outline>
                 Sign In
             </Button>
-          </Link>
+          </Link>)
+          
         )}
         
         {/* Creates the hamburger on smaller screens */}

@@ -7,6 +7,7 @@ import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
 import DashboardComp from '../components/DashboardComp';
 import { motion } from 'framer-motion'
+import DashAds from '../components/DashAds';
 
 
 export default function Dashboard() {
@@ -40,6 +41,9 @@ export default function Dashboard() {
       {tab ==='comments' && <DashComments />}
       {/* dashboard componet */}
       {tab ==='dash' && <DashboardComp />}
+      {/* Advertisements */}
+      {tab ==='ads' && <DashAds />}
+
 
     </motion.div>
   )

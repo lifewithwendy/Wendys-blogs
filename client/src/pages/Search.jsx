@@ -1,8 +1,10 @@
-import { Button, Select, TextInput } from "flowbite-react";
+import { Button, Select, TextInput, Card } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
+
 
 export default function Search() {
     const [sidebarData, setSidebarData] = useState({
@@ -15,6 +17,8 @@ export default function Search() {
     const [showMore, setShowMore] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const [cardList, setCardList] = useState([]);
+    const { currentUser } = useSelector(state => state.user);
     console.log(sidebarData);
 
     const handleShowMore = async () => {
@@ -103,6 +107,28 @@ export default function Search() {
         }
         fetchPosts();
     },[location.search])
+
+    useEffect(() => {
+        const fetchAds = async () => {
+          try {
+            const res1 = await fetch(`/api/ad/getAdToShow?priority=1&limit=1&user=${currentUser}`);
+            const res2 = await fetch(`/api/ad/getAdToShow?priority=2&limit=1&user=${currentUser}`);
+            const res3 = await fetch(`/api/ad/getAdToShow?priority=3&limit=1&user=${currentUser}`);
+            const data1 = await res1.json();
+            const data2 = await res2.json();
+            const data3 = await res3.json();
+            if (res1.ok || res2.ok || res3.ok) {
+              setCardList([data1.ads[0], data2.ads[0], data3.ads[0]]);
+            }
+          } catch (error) {
+            console.log(error.message);
+          }
+          
+        }
+        fetchAds();
+      },[]
+    )  
+
   return (
     <motion.div 
         className="flex flex-col md:flex-row"
@@ -172,6 +198,22 @@ export default function Search() {
             </button>
         )}
         </div>
+        {cardList && (
+        <div className="mt-3 flex flex-wrap justify-center items-center space-x-4 overflow-x-auto">
+        {cardList.map((card) => (
+            <div key={card._id} className="flex-1">
+                <Card className="h-full">
+                    <a href={card.link}>
+                        <img 
+                            src={card.image} 
+                            alt={card.title} 
+                            className="h-full object-cover" />
+                    </a>
+                </Card>
+            </div>
+        ))}
+        </div>
+        )}
       </div>
     </motion.div>
   )

@@ -17,6 +17,9 @@ export default function DashboardComp() {
   const [lastMonthComments, setLastMonthComments] = useState(0);
   const [lastMonthPosts, setLastMonthPosts] = useState(0);
   const { currentUser } = useSelector(state => state.user);
+  const [ads, setAds] = useState([]);
+  const [totalAds, setTotalAds] = useState(0);
+  const [lastMonthAds, setLastMonthAds] = useState(0);
   useEffect(()=> {
     try {
      const fetchUsers = async () => {
@@ -46,10 +49,21 @@ export default function DashboardComp() {
           setLastMonthComments(data.lastMonthComments);
         }
       }
+      const fetchAds = async () => {
+        const res = await fetch('/api/ad/getAds?limit=5');
+        const data = await res.json();
+        console.log(data);
+        if(res.ok){
+          setAds(data.ads);
+          setTotalAds(data.totalAds);
+          setLastMonthAds(data.lastMonthAds);
+        }
+      }
       if(currentUser.isAdmin){
         fetchUsers();
         fetchPosts();
         fetchComments();
+        fetchAds();
       }
       } catch (error) {
         console.log(error.message);
@@ -63,8 +77,8 @@ export default function DashboardComp() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       >
-      <div className="flex-wrap flex gap-4">
-        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
+      <div className="flex flex-wrap lg:flex-row gap-3 w-full">
+        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 w-full md:w-full lg:w-60 rounded-md shadow-md">
           <div className="flex justify-between">
             <div className="">
               <h3>TOTAL USERS</h3>
@@ -81,7 +95,7 @@ export default function DashboardComp() {
             </div>
         </div>
 
-        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
+        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 w-full md:w-full lg:w-60 rounded-md shadow-md">
           <div className="flex justify-between">
             <div className="">
               <h3>TOTAL POSTS</h3>
@@ -98,11 +112,11 @@ export default function DashboardComp() {
             </div>
         </div>
 
-        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md">
+        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 w-full md:w-full lg:w-60 rounded-md shadow-md">
           <div className="flex justify-between">
             <div className="">
               <h3>TOTAL COMMENTS</h3>
-              <p>{totalUsers}</p>
+              <p>{totalComments}</p>
             </div> 
             <HiAnnotation className='bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg'/>
           </div>
@@ -110,6 +124,23 @@ export default function DashboardComp() {
               <span className='text-green-500 flex items-center'>
                 <HiArrowNarrowUp />
                 {lastMonthComments}
+              </span>
+              <div className="text-gray-500">Last month</div>
+            </div>
+        </div>
+        
+        <div className="flex flex-col p-3 dark:bg-slate-800 gap-4 w-full md:w-full lg:w-60 rounded-md shadow-md">
+          <div className="flex justify-between">
+            <div className="">
+              <h3>TOTAL ADVERTISEMENTS</h3>
+              <p>{totalAds}</p>
+            </div> 
+            <HiAnnotation className='bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg'/>
+          </div>
+          <div className="flex gap-2 text-sm">
+              <span className='text-green-500 flex items-center'>
+                <HiArrowNarrowUp />
+                {lastMonthAds}
               </span>
               <div className="text-gray-500">Last month</div>
             </div>
@@ -216,6 +247,48 @@ export default function DashboardComp() {
                       </Table.Cell>
                       <Table.Cell>
                         {comment.likes.length}
+                      </Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                )
+              })
+            }
+          </Table>
+        </div>
+
+        <div className="flex flex-col m-3 md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800">
+          <div className="flex justify-between p-3 text-sm font-semibold">
+            <h1 className='text-center p-2'>Recent Advertisments</h1>
+            <Button gradientDuoTone='greenToBlue' outline>
+              <Link to='/dashboard?tab=ads'>
+                View All
+              </Link>
+            </Button>
+          </div>
+          <Table className='' hoverable>
+            <Table.Head>
+              <Table.HeadCell>Advertisement</Table.HeadCell>
+              <Table.HeadCell>Title</Table.HeadCell>
+
+              <Table.HeadCell>Views</Table.HeadCell>
+            </Table.Head>
+              {ads && ads.map((ad) =>{
+                return (
+                  <Table.Body key={ad._id} className='divide-y'>
+                    <Table.Row className='bg-white dark:bg-gray-800 dark:border-gray-700'>
+                      <Table.Cell className='w-96'>
+                        <p className='line-clamp-2'>
+                        <img 
+                          src={ad.image} 
+                          alt={ad.link} 
+                          className='w-14 h-10 rounded-md bg-gray-500 object-cover'/>
+                        </p>
+                      </Table.Cell>
+                      <Table.Cell>
+                        {ad.title}
+                      </Table.Cell>
+                      <Table.Cell>
+                        {ad.views.length}
                       </Table.Cell>
                     </Table.Row>
                   </Table.Body>
