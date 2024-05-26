@@ -39,7 +39,7 @@ export const getAdvertisements = async (req, res, next) => {
         const limit = parseInt(req.query.limit) || 9;
         const sortDirection = req.query.sort === 'desc' ? -1 : 1;
         const ads = await Advertisement.find()
-            .sort({ createdAt: sortDirection })
+            .sort({  priority: -1, createdAt: sortDirection })
             .skip(startIndex)
             .limit(limit);
 
