@@ -150,7 +150,12 @@ export default function PostPage() {
         {cardList.map((card) => (
             <div key={card._id} className="flex-1">
                 <Card className="h-full">
-                    <img src={card.image} alt={card.title} className="h-full object-cover" />
+                    <a href={card.link}>
+                        <img 
+                            src={card.image} 
+                            alt={card.title} 
+                            className="h-full object-cover" />
+                    </a>
                 </Card>
             </div>
         ))}
