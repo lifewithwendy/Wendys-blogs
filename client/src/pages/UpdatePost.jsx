@@ -12,7 +12,6 @@ import { useEffect, useState, } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css'
 import { useNavigate, useParams } from  'react-router-dom'
-import { set } from 'mongoose';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion'
 
@@ -20,18 +19,24 @@ export default function UpdatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  const [formData, setformData] = useState({});
+  const [formData, setFormData] = useState({
+    title: "",
+    category: 'uncategorized',
+    content: "",
+    image: "",
+  });
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();	
   const navigate = useNavigate();
   const { currentUser } = useSelector(state => state.user);
   
-  console.log(formData);
+  
   useEffect(() => {
     try {
         const fetchPost = async () => {
             const res = await fetch(`/api/post/getposts?postId=${postId}`);
             const data = await res.json();
+            console.log(data.posts[0]);
             if(!res.ok) {
                 console.log(data.message);
                 setPublishError(data.message);
@@ -39,7 +44,13 @@ export default function UpdatePost() {
             } 
             if(res.ok) {
                 setPublishError(null);
-                setformData(data.posts[0]);
+                setFormData({
+                  title: data.posts[0].title,
+                  category: data.posts[0].category,
+                  content: data.posts[0].content,
+                  image: data.posts[0].image,
+                });
+                console.log(formData);
             }
         }
         fetchPost();
@@ -53,7 +64,7 @@ export default function UpdatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
+      const res = await fetch(`/api/post/updatepost/${postId}/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +116,7 @@ export default function UpdatePost() {
             console.log('File available at', downloadURL);
             setImageUploadError(null);
             setImageUploadProgress(null);
-            setformData({ ...formData, image: downloadURL })
+            setFormData({ ...formData, image: downloadURL })
           });
         }
       );
@@ -132,11 +143,11 @@ export default function UpdatePost() {
             required id='title'
             className='flex-1' 
             value={formData.title}
-            onChange={(e) => setformData({ ...formData, title: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
           <Select 
             onChange={(e) => 
-              setformData({ ...formData, category: e.target.value }) 
+              setFormData({ ...formData, category: e.target.value }) 
             }
             value={formData.category }
           >
@@ -190,7 +201,7 @@ export default function UpdatePost() {
           placeholder='Write Something....'
           className='h-72 mb-12 '
           required
-          onChange={(value) => setformData({ ...formData, content: value})}
+          onChange={(value) => setFormData({ ...formData, content: value})}
           />
         <Button 
           className='' 

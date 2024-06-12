@@ -16,6 +16,7 @@ import UpdateAd from "../pages/UpdateAd"
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {AnimatePresence} from 'framer-motion'
+import Subscribe from '../pages/Subscribe';
 
 function AnimatedRoutes() {
     const location = useLocation();
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/about" element={<About />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/sub" element={<Subscribe />} />
         <Route path="/post/:postSlug" element={<PostPage />} />        
       </Routes>
     </AnimatePresence>
