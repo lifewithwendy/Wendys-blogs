@@ -14,7 +14,7 @@ export default function CallToAction() {
         javascript tutorials, tips and tricks.
         </p>
         <Button gradientDuoTone='greenToBlue' outline className='rounded-tr-none rounded-bl-none'>
-            <a href="https://www.100jsprojects.com" target='_blank' rel='noopener noreferrer'>
+            <a href="/sub" target='_blank' rel='noopener noreferrer'>
                 Subscribe
             </a>
         </Button>

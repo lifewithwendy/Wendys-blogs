@@ -43,7 +43,7 @@ return (
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="felx flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
+      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-3xl mb-4 font-bold lg:text-6xl">Wellcome to my blog</h1>
         <p className="text-gray-500 text-xs">Here you will find veriety of articles and tutorials on toppics
           such as web development, software engineering, and programming languages.
@@ -74,7 +74,7 @@ return (
         )}
       <div className="max-w-6px mx-auto flex flex-col gap-8 py-7">
         {posts && posts.length > 0 && (
-            <div className="flec flex-col gap-6 py-7">
+            <div className="flex flex-col gap-6 py-7">
               <h2 className='text-2xl mb-4 font-semibold text-center'>Recent Posts</h2>
               <div className="flex flex-wrap justify-center gap-5">
                 {posts.map((post) => (

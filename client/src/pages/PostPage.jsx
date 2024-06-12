@@ -203,7 +203,7 @@ export default function PostPage() {
                 alt={Ad2[0].title} 
                 className='w-full h-full object-cover rounded-md'
                 />
-              <Toast.Toggle className='absolute top-0 right-0 p-2 bg-gray-800 rounded-full text-white hover:bg-gray-700'/>
+              <Toast.Toggle className='absolute top-0 right-0 p-2 bg-opacity-0 rounded-full text-gray-500 hover:bg-gray-700'/>
             </Toast>
           }
           {Ad2[1] &&
@@ -213,7 +213,7 @@ export default function PostPage() {
                 alt={Ad2[1].title} 
                 className='w-full h-full object-cover rounded-md'
                 />
-              <Toast.Toggle className='absolute top-0 right-0 p-2 bg-gray-800 rounded-full text-white hover:bg-gray-700'/>
+              <Toast.Toggle className='absolute top-0 right-0 p-2 bg-opacity-0 rounded-full text-gray-500 hover:bg-gray-700'/>
             </Toast>
           }
         </div>
