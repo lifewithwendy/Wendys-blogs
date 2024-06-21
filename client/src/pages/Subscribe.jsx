@@ -1,24 +1,33 @@
 import { Button } from 'flowbite-react'
-import React,{useEffect} from 'react'
+import React,{ useEffect, useState, } from 'react'
+import { useSelector } from 'react-redux'
 
 
 export default function Subscribe() {
+  const { currentUser } = useSelector(state => state.user);
   useEffect(() => {
-    try {
-      const fetchAd = async () => {
-          const res = await fetch(`/api/sub/create`);
-          const data = await res.json();
-          if(!res.ok) {
-              console.log(data.message);
-              return;
-          } 
-          if(res.ok) {
-              
-          }
+    const getsubs = async () => {
+      const res = await fetch('/api/sub/makepayment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId : currentUser._id,        
+          type: '1',
+        }),
+      });
+      const data = await res.json();
+      if(!res.ok) {
+        console.log(res.error)
       }
-      fetchAd();
-
-
+      if(res.ok) {
+        console.log(data)
+        // navigate(`/home`);
+      }
+    }
+    try {
+      getsubs();
   } catch (error) {
       console.log(error);
   }
@@ -26,7 +35,7 @@ export default function Subscribe() {
   return (
     <div className='h-screen flex items-center justify-center'>
       <Button 
-        className='h-'
+        className=''
         >
         Subscribe
       </Button>

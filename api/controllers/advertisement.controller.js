@@ -124,7 +124,7 @@ export const getAdToShow = async (req, res, next) => {
             user: userId,
             date: new Date().toISOString()
         };
-        console.log(priority, limit, userId);
+        // console.log(priority, limit, userId);
 
         const ads = await Advertisement.find({ priority })
             .sort({ viewsCount: 1 })
