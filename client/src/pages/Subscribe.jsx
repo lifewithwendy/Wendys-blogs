@@ -3,6 +3,7 @@ import React,{ useEffect, useState, } from 'react'
 import { useSelector } from 'react-redux'
 import { FaCheck, } from 'react-icons/fa';
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom'; 
 
 
 export default function Subscribe() {
@@ -41,6 +42,7 @@ export default function Subscribe() {
       ]
     }
   ];
+  const navigate = useNavigate();
   console.log(subType)
   // useEffect(() => {
   //   const getsubs = async () => {
@@ -80,7 +82,7 @@ export default function Subscribe() {
           {Items.map((item) => (
             <div
               key={item.type}
-              className="flex flex-col p-3 shadow-[3px_5px_5px_1px_rgba(0,0,0,0.2)] w-[350px] h-[450px] mt-12 border-solid gap-4 border-[1px] rounded-[30px] border-gray-400 justify-between items-center"
+              className="flex flex-col p-3 shadow-[3px_5px_5px_1px_rgba(0,0,0,0.2)] w-[350px] h-[450px] mt-12 border-solid gap-4 border-[1px] rounded-[30px] border-gray-400 justify-between items-center hover:scale-110 transition-transform duration-300 ease-in-out"
             >
               <h1 className='text-[20px] mt-3 font-bold'>{item.name}</h1>
               <h1 className='text-5xl font-bold sm:text-1xl'>{item.price}</h1>
@@ -107,14 +109,14 @@ export default function Subscribe() {
             <h1 className='text-5xl sm:mt-[-10vh] font-bold text-center'>Choose your <span className='text-blue-800'> payment </span> method.</h1>
             <div className="flex flex-col w-full gap-8 justify-center items-center">
               <div 
-                onClick={() => {console.log("works")}} 
+                onClick={() => {
+                  navigate(`/makepayment?type=${subType.type}`);}} 
                 className="hover:scale-110 flex p-3 flex-row text-center justify-center border-solid border-[1px] rounded-[30px] border-gray-400  h-48 w-3/4 sm:w-1/2 shadow-[3px_5px_5px_1px_rgba(0,0,0,0.2)] transition-transform duration-300 ease-in-out">
                 <div className="flex  w-1/2 flex-col justify-center items-center">
                   <h1 className='text-[3.5vh] font-bold'>Card Payment</h1>
                   <h1 className='text-gray-400'>Pay with your credit card</h1>  
                 </div>
                 <div 
-                  onClick={() => {console.log("works")}}
                   className="w-1/2 flex justify-center items-center">
                   <div className="border-solid  border-[1px] rounded-[10px] border-blue-800 bg-blue-800 sm:w-[30vh] w-[21vh] sm:h-full h-[15vh]">
                     <div className="bg-gray-700 h-6 mt-8"></div>
@@ -126,7 +128,11 @@ export default function Subscribe() {
                   </div>
                 </div>
               </div>
-              <div className="hover:scale-110 flex p-3 flex-row  justify-center border-solid border-[1px] rounded-[30px] border-gray-400  h-48 w-3/4 sm:w-1/2 shadow-[3px_5px_5px_1px_rgba(0,0,0,0.2)] transition-transform duration-300 ease-in-out">
+
+              <div 
+                onClick={() => {
+                  navigate(`/maketranfer?type=${subType.type}`);}} 
+                className="hover:scale-110 flex p-3 flex-row  justify-center border-solid border-[1px] rounded-[30px] border-gray-400  h-48 w-3/4 sm:w-1/2 shadow-[3px_5px_5px_1px_rgba(0,0,0,0.2)] transition-transform duration-300 ease-in-out">
                 <div className="flex w-1/2 flex-col justify-center items-center">
                   <h1 className='text-[3.5vh] font-bold'>Bank Tranfer</h1>
                   <h1 className='text-gray-400 text-center'>Make a bank tranfer and subscribe</h1>  

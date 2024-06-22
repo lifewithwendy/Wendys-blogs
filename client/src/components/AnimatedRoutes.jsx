@@ -22,17 +22,16 @@ function AnimatedRoutes() {
     const location = useLocation();
   return (
     <AnimatePresence>
-    <Routes location={location} key={location.pathname} >  
+      <Routes location={location} key={location.pathname} >  
         <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute /> } >
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
         <Route element={<OnlyAdminPrivateRoute /> } >
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/update-post/:postId" element={<UpdatePost />} />
-        <Route path="/create-ad" element={<CreateAd />} />
-        <Route path="/update-ad/:adId" element={<UpdateAd />} />
-
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/update-post/:postId" element={<UpdatePost />} />
+          <Route path="/create-ad" element={<CreateAd />} />
+          <Route path="/update-ad/:adId" element={<UpdateAd />} />
         </Route>
         <Route path="/projects" element={<Projects />} />
         <Route path="/sign-up" element={<SignUp />} />
