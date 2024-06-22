@@ -12,11 +12,14 @@ import UpdatePost from '../pages/UpdatePost';
 import PostPage from "../pages/PostPage";
 import Search from "../pages/Search";
 import CreateAd from "../pages/CreateAd";
-import UpdateAd from "../pages/UpdateAd"
+import UpdateAd from "../pages/UpdateAd";
+import MakePayment from '../pages/MakePayment';
+import MakeTranfer from '../pages/MakeTranfer';
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {AnimatePresence} from 'framer-motion'
 import Subscribe from '../pages/Subscribe';
+
 
 function AnimatedRoutes() {
     const location = useLocation();
@@ -41,6 +44,8 @@ function AnimatedRoutes() {
         <Route path="/home" element={<Home />} />
         <Route path="/sub" element={<Subscribe />} />
         <Route path="/post/:postSlug" element={<PostPage />} />        
+        <Route path="/makepayment" element={<MakePayment />} />        
+        <Route path="/maketranfer" element={<MakeTranfer />} />        
       </Routes>
     </AnimatePresence>
   )
