@@ -62,7 +62,7 @@ export const makepayment = async (req, res, next) => {
                 { new: true }
             );  
             updateSub.save();
-            return res.status(400).json({message: "User subscription extended"})
+            return res.status(200).json({message: "User subscription extended"})
         }else{
             const now = new Date();           
             //type: 1 = weekly, 2 = monthly,  3 = yearly
@@ -145,4 +145,45 @@ export const deletesub = async (req, res, next) => {
 export const updatesub = async (req, res, next) => {
     console.log("works")
     
+};
+
+export const freetrial = async (req, res, next) => {
+    if(!req.body.userId ) 
+        return next(errorHandler(204, 'user id and type required'));
+    
+    try {
+        const { userId,type } = req.body;
+        const sub = await Sub.findOne({userId: userId});
+        
+        if(!sub){
+            const now = new Date();           
+            //type: 1 = weekly, 2 = monthly,  3 = yearly
+            let valid = new Date(
+                now.getFullYear(),
+                now.getMonth() ,
+                now.getDate() + 14,
+            );//initial free trial 2 weeks
+            // console.log(now)
+            // console.log(valid)
+            
+                const newSub = new Sub({
+                userId: userId,
+                validUntil: valid,
+                status: 1,
+                history: [{
+                    paymentDate:now, 
+                    type: type,
+                    validUntil: valid, 
+                }]
+            })
+            await newSub.save();
+            return res.status(200).json({message: "free trial created"})
+        }else{
+            return res.status(400).json({message: "free trial already exists"})
+        }
+        
+    } catch (error) {
+        console.log(error.message);
+        next(error);
+    }
 };
